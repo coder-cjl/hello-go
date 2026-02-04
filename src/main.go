@@ -43,7 +43,9 @@ func test6() {
 func mysqlTest() {
 	// t := MyGormSQL{}
 	// t.Test()
-	t := GoRedis{}
+	// t := GoRedis{}
+	// t := GoEtcd{}
+	t := GoKafka{}
 	t.Test()
 }
 
