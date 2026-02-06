@@ -45,7 +45,9 @@ func mysqlTest() {
 	// t.Test()
 	// t := GoRedis{}
 	// t := GoEtcd{}
-	t := GoKafka{}
+	// t := GoKafka{}
+	// t := GoRabbit{}
+	t := GoGin{}
 	t.Test()
 }
 

@@ -9,18 +9,18 @@ import (
 
 var etcdClient *clientv3.Client
 
-func init() {
-	var err error
-	etcdClient, err = clientv3.New(clientv3.Config{
-		Endpoints:   []string{"localhost:2379"},
-		DialTimeout: 5 * time.Second,
-	})
-	if err != nil {
-		Log.Error("Failed to connect to etcd:", err)
-		return
-	}
-	Log.Info("Connected to etcd successfully")
-}
+// func init() {
+// 	var err error
+// 	etcdClient, err = clientv3.New(clientv3.Config{
+// 		Endpoints:   []string{"localhost:2379"},
+// 		DialTimeout: 5 * time.Second,
+// 	})
+// 	if err != nil {
+// 		Log.Error("Failed to connect to etcd:", err)
+// 		return
+// 	}
+// 	Log.Info("Connected to etcd successfully")
+// }
 
 func go_etcd_ts1() {
 	var err error

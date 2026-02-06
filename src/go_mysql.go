@@ -24,14 +24,14 @@ type Place struct {
 
 var Db *sqlx.DB
 
-func init() {
-	database, err := sqlx.Open("mysql", "root:123456@~!@tcp(localhost:3306)/dev")
-	if err != nil {
-		Log.Error("open mysql failed")
-		return
-	}
-	Db = database
-}
+// func init() {
+// 	database, err := sqlx.Open("mysql", "root:123456@~!@tcp(localhost:3306)/dev")
+// 	if err != nil {
+// 		Log.Error("open mysql failed")
+// 		return
+// 	}
+// 	Db = database
+// }
 
 func InsertPerson(p Person) error {
 	resp, err := Db.NamedExec(`INSERT INTO person (username, sex, email) VALUES (:username, :sex, :email)`, &p)

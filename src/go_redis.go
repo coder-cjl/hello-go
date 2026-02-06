@@ -6,15 +6,15 @@ import (
 
 var RedisConn redis.Conn
 
-func init() {
-	var err error
-	RedisConn, err = redis.Dial("tcp", "localhost:6379")
-	if err != nil {
-		Log.Error("Failed to connect to Redis:", err)
-		return
-	}
-	Log.Info("Connected to Redis successfully")
-}
+// func init() {
+// 	var err error
+// 	RedisConn, err = redis.Dial("tcp", "localhost:6379")
+// 	if err != nil {
+// 		Log.Error("Failed to connect to Redis:", err)
+// 		return
+// 	}
+// 	Log.Info("Connected to Redis successfully")
+// }
 
 func SetValue(key string, value string) error {
 	_, err := RedisConn.Do("SET", key, value)
