@@ -1,5 +1,7 @@
 package main
 
+import "time"
+
 // func test1() {
 // 	a := Add(1, 2)
 // 	fmt.Println(a)
@@ -47,8 +49,20 @@ func mysqlTest() {
 	// t := GoEtcd{}
 	// t := GoKafka{}
 	// t := GoRabbit{}
-	t := GoGin{}
-	t.Test()
+	// t := GoGin{}
+	// t := GoGin1{}
+	// t.Test()
+
+	// 在 goroutine 中启动 RPC 服务器
+	s := RpcService{}
+	go s.Start()
+
+	// 等待服务器启动完成
+	time.Sleep(1 * time.Second)
+
+	// 启动 RPC 客户端
+	c := RpcClient{}
+	c.Start()
 }
 
 func main() {
