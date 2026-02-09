@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"hello-go/src/logger"
 	"net"
 	"sync"
 	"time"
+
+	"go.uber.org/zap"
 )
 
 type TcpScan struct{}
@@ -37,5 +40,5 @@ func (t TcpScan) Start() {
 
 	}
 	wg.Wait()
-	Log.Infof("opened ports: %v\n", ports)
+	logger.Info("TCP 端口扫描完成", zap.Ints("opened_ports", ports))
 }

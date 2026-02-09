@@ -17,6 +17,7 @@ var (
 type Config struct {
 	Level      string // 日志级别: debug, info, warn, error, fatal
 	Env        string // 环境: dev, prod
+	Topic      string // 日志主题
 	FilePath   string // 日志文件路径（为空则只输出到控制台）
 	MaxSize    int    // 单个日志文件最大 MB
 	MaxBackups int    // 保留的旧日志文件数量
@@ -27,9 +28,10 @@ type Config struct {
 // DefaultConfig 默认配置
 func DefaultConfig() *Config {
 	return &Config{
-		Level:      "info",
+		Level:      "debug",
 		Env:        "dev",
-		FilePath:   "",
+		Topic:      "LUCA",
+		FilePath:   "logs/app.log",
 		MaxSize:    100,
 		MaxBackups: 10,
 		MaxAge:     30,
@@ -44,7 +46,7 @@ func Init(cfg *Config) error {
 	}
 
 	// 解析日志级别
-	level := zapcore.InfoLevel
+	level := zapcore.DebugLevel
 	if err := level.UnmarshalText([]byte(cfg.Level)); err != nil {
 		level = zapcore.InfoLevel
 	}
@@ -104,7 +106,7 @@ func Init(cfg *Config) error {
 		zap.AddCaller(),
 		zap.AddCallerSkip(1),
 		zap.AddStacktrace(zapcore.ErrorLevel), // Error 级别及以上才打印堆栈
-	)
+	).Named(cfg.Topic) // 使用 Named 将 topic 作为 logger 名称
 
 	sugar = log.Sugar()
 	return nil

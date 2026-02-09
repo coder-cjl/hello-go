@@ -1,9 +1,8 @@
 package main
 
 import (
+	"hello-go/src/api"
 	"hello-go/src/logger"
-
-	"go.uber.org/zap"
 )
 
 // func test1() {
@@ -68,7 +67,10 @@ func mysqlTest() {
 	// c := RpcClient{}
 	// c.Start()
 
-	t := TcpScan{}
+	// t := TcpScan{}
+	// t.Start()
+
+	t := api.AppApi{}
 	t.Start()
 }
 
@@ -89,23 +91,18 @@ func main() {
 
 	mysqlTest()
 
-	// 演示结构化日志
-	logger.Info("应用启动",
-		zap.String("version", "1.0.0"),
-		zap.Int("port", 8080),
-	)
-	logger.Infof("应用启动",
-		zap.String("version", "1.0.0"),
-		zap.Int("port", 8080),
-	)
+	// 演示结构化日志（使用 Info，传入 zap.Field）
+	// logger.Info("应用启动",
+	// 	zap.String("version", "1.0.0"),
+	// 	zap.Int("port", 8080),
+	// )
 
-	// 演示格式化日志
-	logger.Infof("处理了 100 个请求")
-	logger.Infof("处理了 %d 个请求", 100)
-	logger.Debug("调试信息")
-	logger.Debugf("调试信息: %v", map[string]int{"count": 5})
-	logger.Warnf("警告: CPU 使用率 %d%%", 85)
-	logger.Errorf("错误: %s", "连接超时")
+	// // 演示格式化日志（使用 Infof，传入格式化字符串）
+	// logger.Infof("处理了 %d 个请求", 100)
+	// logger.Debug("调试信息")
+	// logger.Debugf("调试信息: %v", map[string]int{"count": 5})
+	// logger.Warnf("警告: CPU 使用率 %d%%", 85)
+	// logger.Errorf("错误: %s", "连接超时")
 	// test5()
 	// test4()
 	// test3()
