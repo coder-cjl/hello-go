@@ -121,7 +121,7 @@ func getCachedToken(userID int64, traceID string) (string, bool) {
 }
 
 // 返回登录成功响应
-func respondSuccess(c *gin.Context, token, traceID, username string) {
+func respondSuccessToken(c *gin.Context, token, traceID, username string) {
 	c.JSON(http.StatusOK, ApiResponse{
 		Code:    http.StatusOK,
 		Message: http.StatusText(http.StatusOK),
@@ -176,7 +176,7 @@ func loginHandle(c *gin.Context) {
 	} else {
 		// 老用户，尝试从缓存获取 token
 		if token, ok := getCachedToken(user.ID, traceID); ok {
-			respondSuccess(c, token, traceID, reqParams.Username)
+			respondSuccessToken(c, token, traceID, reqParams.Username)
 			return
 		}
 	}
@@ -188,7 +188,7 @@ func loginHandle(c *gin.Context) {
 		return
 	}
 
-	respondSuccess(c, token, traceID, reqParams.Username)
+	respondSuccessToken(c, token, traceID, reqParams.Username)
 }
 
 // 更新用户信息
