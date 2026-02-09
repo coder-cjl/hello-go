@@ -65,7 +65,7 @@ type UserLoginResponse struct {
 }
 
 type UserInfoVo struct {
-	ID       int64  `gorm:"column:id" json:"id"`
+	ID       int64  `gorm:"column:user_id" json:"user_id"`
 	Nickname string `gorm:"column:nickname" json:"nickname"`
 	Email    string `gorm:"column:email" json:"email"`
 	Gender   string `gorm:"column:gender" json:"gender"`
@@ -220,11 +220,16 @@ func updateUserHandle(c *gin.Context) {
 
 	// 更新用户信息
 	userInfo.ID = userID
-	if err := mysql.Db.Model(&UserInfoVo{}).Where("id = ?", userID).Updates(userInfo).Error; err != nil {
+	if err := mysql.Db.Model(&UserInfoVo{}).Where("user_id = ?", userID).Updates(userInfo).Error; err != nil {
 		logger.Errorf("[%s] 更新用户信息失败: %v", traceID, err)
 		respondError(c, http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), traceID)
 		return
 	}
 
-	respondSuccess(c, "", traceID, userInfo.Nickname)
+	c.JSON(http.StatusOK, ApiResponse{
+		Code:    http.StatusOK,
+		Message: http.StatusText(http.StatusOK),
+		TraceID: traceID,
+	})
+	logger.Infof("[%s] 用户信息更新成功: user_id=%d", traceID, userID)
 }
