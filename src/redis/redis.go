@@ -15,7 +15,7 @@ func init() {
 		logger.Errorf("Failed to connect to Redis:", err)
 		return
 	}
-	logger.Info("Connected to Redis successfully")
+	logger.Info("Redis 链接成功")
 }
 
 func SetValue(key string, value string) error {
